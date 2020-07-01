@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<!--css-->
+			<style type="text/css"> 
+			    table tr th{background: #ffffff;
+					　　　　}
+			    table,table tr th, table tr td { border:1px solid #eaeaea; }
+				table {
+					min-width: 400px;
+					min-height: 30px;
+				    line-height: 30px;
+				    text-align: center;
+				    border-collapse: collapse;
+								}   
+		    </style>
+	</head>
+	<body>
+		<div id="appb">
+			{{bookstores}}
+			<table>
+				<tr>
+				      <!-- <th>序号</th> -->
+				      <th v-for="th in tableTh" >
+				        {{th.title}}
+				      </th>
+				    </tr>
+				    <tr v-for="item of bookList" :key="item.id">
+				      <!-- <td>{{index+1}}</td> -->
+				      <td>{{item.id}}</td>
+					  <td>{{item.name}}</td>
+					  <td>{{item.date}}</td>
+					  <td>{{item.price}}</td>
+					  <td><button v-on:click="tr.num -= 1">-</button> {{item.num}} <button v-on:click="tr.num += 1">+</button></td>
+					  <td><button v-on:click="remove">移除</button></td>
+				    </tr>
+			</table>
+			<h2>总价格：￥{{total}}</h2>
+		</div>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			let appb = new Vue({
+				el: '#appb',
+				data: {
+									bookstores: '书籍',
+									num1: 1,
+									orderBy: ["t1", "t2", "t3", "t4", "t5", "t6"],
+									tableTh: {//表头的描述信息
+									        t1: {
+									          title: "  ", 
+									          align: "left"
+									        },
+									        t2: {
+									          title: "书籍名称",
+									          align: "right"
+									        },
+											t3: {
+											  title: "出版日期",
+											  align: "right"
+											},
+											t4: {
+											  title: "价格",
+											  align: "right"
+											},
+											t5: {
+											  title: "购买数量",
+											  align: "right"
+											},
+											t6: {
+											  title: "操作",
+											  align: "right"
+											}
+									      },
+									
+									bookList: [{
+											id: 1,
+											date: '2010-10',
+											price: 48,
+											num: 1,
+											name: 'JAVA从入门到放弃',
+										},
+										{
+											id: 2,
+											date: '2011-10',
+											price: 80,
+											num: 1,
+											name: 'PYTHON从入门到放弃',
+										},
+										{
+											id: 3,
+											date: '2012-10',
+											price: 75,
+											num: 1,
+											name: 'PHP从入门到放弃',
+										},
+										{
+											id: 4,
+											date: '2013-10',
+											price: 50,
+											num: 1,
+											name: 'C语言从入门到放弃',
+										}
+									],									
+								},
+								methods: {
+									reduce: function(num1) {
+									if (this.num1<=0){
+									alert('宝贝不能再减少啦')	 
+									this.num1=0;
+									}else {										 
+									this.num1-=1;	 
+									      }
+									},
+									add: function() {
+									this.num1=this.num1+1
+									},
+									remove: function() {
+										this.bookList.pop()
+									},
+								},
+								computed:{
+									total: function(){
+										return bookList.reduce(())
+									}
+								}
+			})
+		</script>
+	</body>
+</html>
