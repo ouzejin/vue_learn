@@ -27,6 +27,7 @@
 				        {{th.title}}
 				      </th>
 				    </tr>
+<<<<<<< HEAD
 				    <tr v-for="item of bookList" :key="item.id">
 				      <!-- <td>{{index+1}}</td> -->
 				      <td>{{item.id}}</td>
@@ -42,6 +43,22 @@
 		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			let appb = new Vue({
+=======
+				    <tr v-for="(tr,index) in bookList">
+				      <!-- <td>{{index+1}}</td> -->
+				      <td>{{tr.id}}</td>
+					  <td>{{tr.name}}</td>
+					  <td>{{tr.date}}</td>
+					  <td>{{tr.price}}</td>
+					  <td><button v-on:click="tr.num -= 1">-</button> {{tr.num}} <button v-on:click="tr.num += 1">+</button></td>
+					  <td><button v-on:click="remove">移除</button></td>
+				    </tr>
+			</table>
+		</div>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var appb = new Vue({
+>>>>>>> 0d10562185cb902924a6391e05efc7ed016a6015
 				el: '#appb',
 				data: {
 									bookstores: '书籍',
@@ -119,11 +136,14 @@
 									remove: function() {
 										this.bookList.pop()
 									},
+<<<<<<< HEAD
 								},
 								computed:{
 									total: function(){
 										return bookList.reduce(())
 									}
+=======
+>>>>>>> 0d10562185cb902924a6391e05efc7ed016a6015
 								}
 			})
 		</script>
