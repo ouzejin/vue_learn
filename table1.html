@@ -28,22 +28,25 @@
 					<th>操作</th>
 				</thead>
 				<tbody>
-					<tr v-for="item of books" :key="item.id">
+					<tr v-for="(item, index) of books" :key="item.id">
 						<td><input type="checkbox" :checked="item.isChecked"></td>
 						<td>{{item.id}}</td>
 						<td>{{item.name}}</td>
 						<td>{{item.tdate}}</td>
 						<td>{{formatPrice(item.price)}}</td>
 						<td>
-							<button type="button">-</button>
+							<button type="button" v-on:click="reduce(item)" :disabled="item.count < 1">-</button>
 						{{item.count}}
-							<button type="button">+</button>
+							<button type="button" v-on:click="add(item)">+</button>
 						</td>
-						<td><button type="button">删除</button></td>
+						<td><button type="button" v-on:click="remove(index)">删除</button></td>
 					</tr>
 				</tbody>
 			</table>
-			<h3>总价：{{formatPrice(total)}}</h3>
+			<h3>总价：{{formatPrice(total)}}&nbsp&nbsp&nbsp
+				<button type="button" v-on:click="login()">&nbspLogin&nbsp</button>
+			</h3>
+			<hr/>				
 		</div>
 		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
@@ -56,6 +59,23 @@
 						{isChecked: false, id: 3, name: 'C语言从入门到放弃', tdate: '2020.04.02', price: 60.06, count: 3},
 						{isChecked: false, id: 4, name: 'Vue从入门到放弃', tdate: '2020.05.02', price: 40.00, count: 4},
 					]
+				},
+				methods:{
+					add: function(item) {
+						item.count++;
+						console.log(item.name,item.count);
+					},
+					reduce: function(item) {
+						item.count--;
+						console.log(item.name,item.count);
+					},
+					remove: function(index){
+						this.books.splice(index,1);
+						console.log("remove-id:::"+(index+1));
+					},
+					login: function(){
+						console.log("正在登陆中...");
+					}
 				},
 				computed: {
 					total: function() {
